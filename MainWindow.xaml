@@ -1,0 +1,118 @@
+﻿<Window x:Class="AutoCloseTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Auto Close Timer - Ömer Genç" Height="710" Width="460"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Icon="app.ico"
+        Background="#121316">
+
+    <Window.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#D1D5DB"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#22242A"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#333742"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- Outer Border with generous padding -->
+    <Border Padding="28,24,28,18">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header & Social Links -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,22">
+                <TextBlock Text="AUTO CLOSE TIMER" FontSize="22" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                <TextBlock Text="Ömer Genç • System Shutdown Control Panel" FontSize="12" Foreground="#9CA3AF" HorizontalAlignment="Center" Margin="0,4,0,16"/>
+
+                <UniformGrid Columns="4" Margin="0,2,0,0">
+                    <Button Content="LinkedIn" Margin="3" Padding="6,10" Background="#1C1E24" Foreground="#818CF8" BorderBrush="#2E323D" Cursor="Hand" Click="OpenLinkedIn"/>
+                    <Button Content="Instagram" Margin="3" Padding="6,10" Background="#1C1E24" Foreground="#818CF8" BorderBrush="#2E323D" Cursor="Hand" Click="OpenInstagram"/>
+                    <Button Content="Kick" Margin="3" Padding="6,10" Background="#1C1E24" Foreground="#818CF8" BorderBrush="#2E323D" Cursor="Hand" Click="OpenKick"/>
+                    <Button Content="GitHub" Margin="3" Padding="6,10" Background="#1C1E24" Foreground="#818CF8" BorderBrush="#2E323D" Cursor="Hand" Click="OpenGithub"/>
+                </UniformGrid>
+            </StackPanel>
+
+            <!-- Main Controls Card -->
+            <Border Grid.Row="1" Background="#1A1C22" CornerRadius="14" Padding="22" BorderBrush="#2A2E38" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="ACTION TYPE" FontSize="11" FontWeight="Bold" Foreground="#818CF8" Margin="0,0,0,14"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,22">
+                        <RadioButton x:Name="rbShutdown" Content="Shutdown" IsChecked="True" Margin="0,0,24,0"/>
+                        <RadioButton x:Name="rbRestart" Content="Restart" Margin="0,0,24,0"/>
+                        <RadioButton x:Name="rbSleep" Content="Sleep"/>
+                    </StackPanel>
+
+                    <TextBlock Text="SET TIMER" FontSize="11" FontWeight="Bold" Foreground="#818CF8" Margin="0,0,0,12"/>
+                    <Grid Margin="0,0,0,18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Hours" FontSize="11" Foreground="#9CA3AF" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtHours" Text="0"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Minutes" FontSize="11" Foreground="#9CA3AF" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtMinutes" Text="30"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Seconds" FontSize="11" Foreground="#9CA3AF" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                            <TextBox x:Name="txtSeconds" Text="0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Quick Pre-sets -->
+                    <UniformGrid Columns="4" Margin="0,2,0,0">
+                        <Button Content="+15m" Margin="3" Padding="4,8" Background="#22242A" Foreground="#D1D5DB" BorderBrush="#333742" Cursor="Hand" Click="Quick15"/>
+                        <Button Content="+30m" Margin="3" Padding="4,8" Background="#22242A" Foreground="#D1D5DB" BorderBrush="#333742" Cursor="Hand" Click="Quick30"/>
+                        <Button Content="+1h" Margin="3" Padding="4,8" Background="#22242A" Foreground="#D1D5DB" BorderBrush="#333742" Cursor="Hand" Click="Quick60"/>
+                        <Button Content="+2h" Margin="3" Padding="4,8" Background="#22242A" Foreground="#D1D5DB" BorderBrush="#333742" Cursor="Hand" Click="Quick120"/>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- Live Digital Display -->
+            <TextBlock x:Name="lblCountdown" Grid.Row="2" Text="00:30:00" FontSize="36" FontWeight="Bold" 
+                       FontFamily="Consolas" Foreground="#818CF8" HorizontalAlignment="Center" Margin="0,20,0,16"/>
+
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="3">
+                <Button x:Name="btnStart" Content="START TIMER" Background="#6366F1" Foreground="#FFFFFF"
+                        FontWeight="SemiBold" FontSize="14" Padding="0,13" Margin="0,0,0,10" BorderThickness="0" Cursor="Hand" Click="StartTimer"/>
+                <Button Content="CANCEL TASK" Background="#2D171A" Foreground="#F87171" BorderBrush="#4C1D24" BorderThickness="1"
+                        FontWeight="SemiBold" FontSize="13" Padding="0,11" Cursor="Hand" Click="CancelTimer"/>
+            </StackPanel>
+
+            <!-- AI Attribution Badge -->
+            <Border Grid.Row="4" Margin="0,16,0,0" Background="#17181D" CornerRadius="6" Padding="8,5" HorizontalAlignment="Center" BorderBrush="#25272F" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="✦ " Foreground="#818CF8" FontSize="11" VerticalAlignment="Center"/>
+                    <TextBlock Text="AI Assisted Architecture • Designed with Gemini" Foreground="#6B7280" FontSize="10" FontWeight="Medium" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

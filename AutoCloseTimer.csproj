@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+
+        <!-- .EXE dosyasının Windows'taki simgesi için -->
+        <ApplicationIcon>app.ico</ApplicationIcon>
+
+        <!-- Tek dosya ve bağımsız çalıştırma ayarları -->
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <SelfContained>true</SelfContained>
+        <PublishSingleFile>true</PublishSingleFile>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <PublishTrimmed>false</PublishTrimmed>
+    </PropertyGroup>
+
+    <!-- WPF Penceresinin sol üstü için Resource olarak gömme -->
+    <ItemGroup>
+        <Resource Include="app.ico" />
+    </ItemGroup>
+
+</Project>
